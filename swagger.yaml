@@ -1,0 +1,45 @@
+swagger: "2.0"
+info:
+  title: "Address Microservice API"
+  description: "API for managing addresses"
+  version: "1.0"
+host: "localhost:3001"
+basePath: "/api"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /addresses:
+    post:
+      summary: Create a new address
+      tags:
+        - Addresses
+      parameters:
+        - name: body
+          in: body
+          description: Address object
+          required: true
+          schema:
+            $ref: "#/definitions/AddressInput"
+      responses:
+        '201':
+          description: Address created successfully
+        '400':
+          description: Invalid request
+definitions:
+  AddressInput:
+    type: object
+    properties:
+      name:
+        type: string
+      longitude:
+        type: number
+      latitude:
+        type: number
+      active:
+        type: boolean
+      complementary_informations:
+        type: string

@@ -26,7 +26,6 @@ func InitDB() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer db.Close()
 
 	err = db.Ping()
 	if err != nil {
@@ -35,4 +34,5 @@ func InitDB() {
 
 	fmt.Println("Successfully connected!")
 	DB = db
+	// defer db.Close()
 }

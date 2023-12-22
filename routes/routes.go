@@ -1,7 +1,7 @@
 package routes
 
 import (
-	c "address/controllers"
+	ctrl "address/controllers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,13 +9,13 @@ import (
 func SetupRoutes(router *gin.Engine) {
 	api := router.Group("/api")
 	{
-		addressRoutes := api.Group("/addresses")
+		routes := api.Group("/addresses")
 		{
-			addressRoutes.POST("/", c.CreateAddress)
-			addressRoutes.GET("/", c.GetAddresses)
-			addressRoutes.GET("/:id", c.GetAddressByID)
-			addressRoutes.PUT("/:id", c.UpdateAddress)
-			addressRoutes.DELETE("/:id", c.DeleteAddress)
+			routes.POST("/", ctrl.CreateAddress)
+			routes.GET("/", ctrl.GetAddresses)
+			routes.GET("/:id", ctrl.GetAddressByID)
+			routes.PUT("/:id", ctrl.UpdateAddress)
+			routes.DELETE("/:id", ctrl.DeleteAddress)
 		}
 	}
 }
