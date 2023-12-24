@@ -77,15 +77,13 @@ func CreateAddress(c *gin.Context) {
 }
 
 func GetAddresses(c *gin.Context) {
-	// Extract optional query parameters
+
 	isActive := c.Query("active")
 	location_type := c.Query("location_type")
 
-	// Construct the SQL query based on the optional parameters
 	query := "SELECT * FROM addresses WHERE 1=1"
 	args := []interface{}{}
 
-	// Check if the 'active' parameter is provided
 	if isActive != "" {
 		query += " AND active = $1"
 		activeValue, err := strconv.ParseBool(isActive)
@@ -96,13 +94,11 @@ func GetAddresses(c *gin.Context) {
 		args = append(args, activeValue)
 	}
 
-	// Check if the 'event_type' parameter is provided
 	if location_type != "" {
 		query += " AND location_type = $2"
 		args = append(args, location_type)
 	}
 
-	// Execute the SQL query with optional parameters
 	rows, err := u.DB.Query(query, args...)
 	if err != nil {
 		log.Println(err)
@@ -198,7 +194,6 @@ func UpdateAddress(c *gin.Context) {
 		return
 	}
 
-	// Check if the address with the given ID exists
 	var existingAddress models.Address
 	err = u.DB.QueryRow("SELECT * FROM addresses WHERE id = $1", addressID).
 		Scan(
@@ -230,7 +225,6 @@ func UpdateAddress(c *gin.Context) {
 		return
 	}
 
-	// Bind the request body to an Address struct for updating
 	var updatedAddress models.Address
 	if err := c.ShouldBindJSON(&updatedAddress); err != nil {
 		log.Println(err)
@@ -238,7 +232,6 @@ func UpdateAddress(c *gin.Context) {
 		return
 	}
 
-	// Validate required fields
 	requiredFields := []struct {
 		name  string
 		value string
@@ -255,7 +248,6 @@ func UpdateAddress(c *gin.Context) {
 		}
 	}
 
-	// Additional validation checks
 	if !u.IsValidCoordinates(updatedAddress.Latitude, updatedAddress.Longitude) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Latitude and longitude values should fall within the specified range."})
 		return
@@ -276,7 +268,6 @@ func UpdateAddress(c *gin.Context) {
 		return
 	}
 
-	// Update the existing address with the new information
 	_, err = u.DB.Exec(`
 		UPDATE addresses
 		SET name=$1, longitude=$2, latitude=$3, active=$4, created_at=$5, updated_at=$6,
@@ -299,7 +290,6 @@ func UpdateAddress(c *gin.Context) {
 		return
 	}
 
-	// Fetch the updated address
 	err = u.DB.QueryRow("SELECT * FROM addresses WHERE id = $1", addressID).
 		Scan(
 			&updatedAddress.ID,
