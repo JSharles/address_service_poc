@@ -51,7 +51,7 @@ func CreateAddress(c *gin.Context) {
 	}
 
 	if address.Name == "" || address.Longitude == 0 || address.Latitude == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Fields name, longitude and latitude) are required"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Fields name, longitude and latitude are required"})
 		return
 	}
 
@@ -89,6 +89,17 @@ func CreateAddress(c *gin.Context) {
 	c.JSON(http.StatusCreated, address)
 }
 
+// GetAddresses godoc
+// @Summary Get all addresses
+// @Description GetAddresses is an example controller that fetches addresses.
+// @Produce json
+// @Param active query boolean false "Filter by active status"
+// @Param location_type query string false "Filter by location type"
+// @Success 200 {array} models.Address "Successfully retrieved"
+// @Failure 400 {object} string "Bad request"
+// @Failure 401 {object} string "Unauthorized"
+// @Failure 500 {object} string "Internal Server Error"
+// @Router /api/v1/addresses [get]
 func GetAddresses(c *gin.Context) {
 
 	isActive := c.Query("active")
@@ -152,6 +163,16 @@ func GetAddresses(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"addresses": addresses})
 }
 
+// GetAddressByID godoc
+// @Summary Get an address by ID
+// @Description GetAddressByID is an example controller that fetches an address by its ID.
+// @Produce json
+// @Param id path int true "Address ID"
+// @Success 200 {object} models.Address "Successfully retrieved"
+// @Failure 400 {object} string "Bad request"
+// @Failure 404 {object} string "Address not found"
+// @Failure 500 {object} string "Internal Server Error"
+// @Router /api/v1/addresses/{id} [get]
 func GetAddressByID(c *gin.Context) {
 
 	addressIDStr := c.Param("id")
@@ -197,6 +218,18 @@ func GetAddressByID(c *gin.Context) {
 
 }
 
+// UpdateAddress godoc
+// @Summary Update an address by ID
+// @Description UpdateAddress is an example controller that updates an address by its ID.
+// @Accept json
+// @Produce json
+// @Param id path int true "Address ID"
+// @Param address body models.Address true "Updated address information"
+// @Success 200 {object} gin.H "Address updated successfully"
+// @Failure 400 {object} string "Bad request"
+// @Failure 404 {object} string "Address not found"
+// @Failure 500 {object} string "Internal Server Error"
+// @Router /api/v1/addresses/{id} [put]
 func UpdateAddress(c *gin.Context) {
 
 	addressIDStr := c.Param("id")
@@ -331,6 +364,16 @@ func UpdateAddress(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Address updated successfully", "address": updatedAddress})
 }
 
+// DeleteAddress godoc
+// @Summary Delete an address by ID
+// @Description DeleteAddress is an example controller that deletes an address by its ID.
+// @Produce json
+// @Param id path int true "Address ID"
+// @Success 200 {object} gin.H "Address deleted successfully"
+// @Failure 400 {object} string "Bad request"
+// @Failure 404 {object} string "Address not found"
+// @Failure 500 {object} string "Internal Server Error"
+// @Router /api/v1/addresses/{id} [delete]
 func DeleteAddress(c *gin.Context) {
 	addressIDStr := c.Param("id")
 	addressID, err := strconv.Atoi(addressIDStr)

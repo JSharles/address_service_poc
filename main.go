@@ -25,7 +25,11 @@ func main() {
 
 	v1 := r.Group("/api/v1")
 	{
-		v1.POST("/address", h.CreateAddress)
+		v1.POST("/addresses", h.CreateAddress)
+		v1.GET("/addresses", h.GetAddresses)
+		v1.GET("/addresses/:id", h.GetAddressByID)
+		v1.PUT("/addresses/:id", h.UpdateAddress)
+		v1.DELETE("/addresses/:id", h.DeleteAddress)
 		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
 
