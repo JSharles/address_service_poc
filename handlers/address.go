@@ -1,6 +1,7 @@
-package controllers
+package handlers
 
 import (
+	"address/database"
 	"address/models"
 	u "address/utils"
 	"database/sql"
@@ -59,22 +60,22 @@ func CreateAddress(c *gin.Context) {
 		return
 	}
 
-	if !u.IsValidFloorType(address.Floor) {
+	if address.Floor != "" && !u.IsValidFloorType(address.Floor) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Field 'floor' is not valid."})
 		return
 	}
 
-	if !u.IsValidLocationType(address.LocationType) {
+	if address.LocationType != "" && !u.IsValidLocationType(address.LocationType) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Field 'location_type' is not valid."})
 		return
 	}
 
-	if !u.IsValidYardType(address.Yard) {
+	if address.LocationType != "" && !u.IsValidYardType(address.Yard) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Field 'yard' is not valid."})
 		return
 	}
 
-	if err := u.DB.QueryRow(`
+	if err := database.DB.QueryRow(`
 		INSERT INTO addresses (name, longitude, latitude, active, created_at, updated_at, time_zone, complementary_informations, floor, lift, location_type, yard, door_code, loading_dock, side_loading)
 		VALUES ($1, $2, $3, $4, NOW(), NOW(), $5, $6, $7, $8, $9, $10, $11, $12, $13)
 		RETURNING id`,
@@ -111,7 +112,7 @@ func GetAddresses(c *gin.Context) {
 		args = append(args, location_type)
 	}
 
-	rows, err := u.DB.Query(query, args...)
+	rows, err := database.DB.Query(query, args...)
 	if err != nil {
 		log.Println(err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
@@ -162,7 +163,7 @@ func GetAddressByID(c *gin.Context) {
 	}
 
 	var address models.Address
-	err = u.DB.QueryRow("SELECT * FROM addresses WHERE id = $1", addressID).
+	err = database.DB.QueryRow("SELECT * FROM addresses WHERE id = $1", addressID).
 		Scan(
 			&address.ID,
 			&address.Name,
@@ -207,7 +208,7 @@ func UpdateAddress(c *gin.Context) {
 	}
 
 	var existingAddress models.Address
-	err = u.DB.QueryRow("SELECT * FROM addresses WHERE id = $1", addressID).
+	err = database.DB.QueryRow("SELECT * FROM addresses WHERE id = $1", addressID).
 		Scan(
 			&existingAddress.ID,
 			&existingAddress.Name,
@@ -280,7 +281,7 @@ func UpdateAddress(c *gin.Context) {
 		return
 	}
 
-	_, err = u.DB.Exec(`
+	_, err = database.DB.Exec(`
 		UPDATE addresses
 		SET name=$1, longitude=$2, latitude=$3, active=$4, created_at=$5, updated_at=$6,
 			time_zone=$7, complementary_informations=$8, floor=$9, lift=$10,
@@ -302,7 +303,7 @@ func UpdateAddress(c *gin.Context) {
 		return
 	}
 
-	err = u.DB.QueryRow("SELECT * FROM addresses WHERE id = $1", addressID).
+	err = database.DB.QueryRow("SELECT * FROM addresses WHERE id = $1", addressID).
 		Scan(
 			&updatedAddress.ID,
 			&updatedAddress.Name,
@@ -340,7 +341,7 @@ func DeleteAddress(c *gin.Context) {
 	}
 
 	var existingAddress models.Address
-	err = u.DB.QueryRow("SELECT * FROM addresses WHERE id = $1", addressID).
+	err = database.DB.QueryRow("SELECT * FROM addresses WHERE id = $1", addressID).
 		Scan(
 			&existingAddress.ID,
 			&existingAddress.Name,
@@ -365,7 +366,7 @@ func DeleteAddress(c *gin.Context) {
 		return
 	}
 
-	_, err = u.DB.Exec("DELETE FROM addresses WHERE id = $1", addressID)
+	_, err = database.DB.Exec("DELETE FROM addresses WHERE id = $1", addressID)
 	if err != nil {
 		log.Println(err)
 		c.JSON(500, gin.H{"error": "Failed to delete address"})

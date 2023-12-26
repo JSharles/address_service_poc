@@ -1,4 +1,4 @@
-package utils
+package database
 
 import (
 	"database/sql"
@@ -34,5 +34,4 @@ func InitDB() {
 
 	fmt.Println("Successfully connected!")
 	DB = db
-	// defer db.Close()
 }

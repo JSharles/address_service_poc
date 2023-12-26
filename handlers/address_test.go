@@ -1,8 +1,8 @@
-package controllers
+package handlers
 
 import (
+	"address/database"
 	m "address/models"
-	"address/utils"
 	"bytes"
 	"encoding/json"
 	"net/http"
@@ -10,11 +10,11 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-playground/assert/v2"
+	. "github.com/go-playground/assert/v2"
 )
 
 func TestCreateValidAddress(t *testing.T) {
-	utils.InitDB()
+	database.InitDB()
 
 	router := gin.Default()
 	router.POST("/addresses", CreateAddress)
@@ -38,11 +38,11 @@ func TestCreateValidAddress(t *testing.T) {
 	w := httptest.NewRecorder()
 	router.ServeHTTP(w, req)
 
-	assert.Equal(t, http.StatusCreated, w.Code)
+	Equal(t, http.StatusCreated, w.Code)
 }
 
 // func TestCreateAddressWithMissingName(t *testing.T) {
-// 	utils.InitDB()
+// 	database.InitDB()
 
 // 	router := gin.Default()
 // 	router.POST("/addresses", CreateAddress)

@@ -1,7 +1,7 @@
 package routes
 
 import (
-	ctrl "address/controllers"
+	ctrl "address/handlers"
 
 	"github.com/gin-gonic/gin"
 )

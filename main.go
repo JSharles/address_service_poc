@@ -1,9 +1,9 @@
 package main
 
 import (
-	c "address/controllers"
+	"address/database"
+	h "address/handlers"
 	"address/routes"
-	"address/utils"
 
 	_ "address/docs"
 
@@ -18,14 +18,14 @@ import (
 // @host localhost:3001
 // @BasePath /api
 func main() {
-	utils.InitDB()
+	database.InitDB()
 
 	r := gin.Default()
 	routes.SetupRoutes(r)
 
 	v1 := r.Group("/api/v1")
 	{
-		v1.POST("/address", c.CreateAddress)
+		v1.POST("/address", h.CreateAddress)
 		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
 
