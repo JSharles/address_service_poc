@@ -15,6 +15,9 @@
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "addresses"
+                ],
                 "summary": "Get all addresses",
                 "parameters": [
                     {
@@ -69,7 +72,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "address"
+                    "addresses"
                 ],
                 "summary": "Create a new address",
                 "parameters": [
@@ -117,6 +120,9 @@
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "addresses"
+                ],
                 "summary": "Get an address by ID",
                 "parameters": [
                     {
@@ -161,6 +167,9 @@
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "addresses"
                 ],
                 "summary": "Update an address by ID",
                 "parameters": [
@@ -212,6 +221,9 @@
                 "description": "DeleteAddress is an example controller that deletes an address by its ID.",
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "addresses"
                 ],
                 "summary": "Delete an address by ID",
                 "parameters": [

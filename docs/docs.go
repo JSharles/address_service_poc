@@ -21,6 +21,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "addresses"
+                ],
                 "summary": "Get all addresses",
                 "parameters": [
                     {
@@ -75,7 +78,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "address"
+                    "addresses"
                 ],
                 "summary": "Create a new address",
                 "parameters": [
@@ -123,6 +126,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "addresses"
+                ],
                 "summary": "Get an address by ID",
                 "parameters": [
                     {
@@ -167,6 +173,9 @@ const docTemplate = `{
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "addresses"
                 ],
                 "summary": "Update an address by ID",
                 "parameters": [
@@ -218,6 +227,9 @@ const docTemplate = `{
                 "description": "DeleteAddress is an example controller that deletes an address by its ID.",
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "addresses"
                 ],
                 "summary": "Delete an address by ID",
                 "parameters": [

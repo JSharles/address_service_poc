@@ -16,7 +16,7 @@ import (
 // CreateAddress godoc
 // @Summary Create a new address
 // @Description CreateAddress is an example controller to create a new address.
-// @Tags address
+// @Tags addresses
 // @Accept json
 // @Produce json
 // @Param address body models.AddressRequest  true "Address information"
@@ -92,7 +92,7 @@ func CreateAddress(c *gin.Context) {
 // GetAddresses godoc
 // @Summary Get all addresses
 // @Description GetAddresses is an example controller that fetches addresses.
-// @Tags address
+// @Tags addresses
 // @Produce json
 // @Param active query boolean false "Filter by active status"
 // @Param location_type query string false "Filter by location type"
@@ -167,7 +167,7 @@ func GetAddresses(c *gin.Context) {
 // GetAddressByID godoc
 // @Summary Get an address by ID
 // @Description GetAddressByID is an example controller that fetches an address by its ID.
-// @Tags address
+// @Tags addresses
 // @Produce json
 // @Param id path int true "Address ID"
 // @Success 200 {object} models.Address "Successfully retrieved"
@@ -223,7 +223,7 @@ func GetAddressByID(c *gin.Context) {
 // UpdateAddress godoc
 // @Summary Update an address by ID
 // @Description UpdateAddress is an example controller that updates an address by its ID.
-// @Tags address
+// @Tags addresses
 // @Accept json
 // @Produce json
 // @Param id path int true "Address ID"
@@ -370,7 +370,7 @@ func UpdateAddress(c *gin.Context) {
 // DeleteAddress godoc
 // @Summary Delete an address by ID
 // @Description DeleteAddress is an example controller that deletes an address by its ID.
-// @Tags address
+// @Tags addresses
 // @Produce json
 // @Param id path int true "Address ID"
 // @Success 200 {object} string "Address deleted successfully"

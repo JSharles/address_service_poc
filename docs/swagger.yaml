@@ -143,6 +143,8 @@ paths:
           schema:
             type: string
       summary: Get all addresses
+      tags:
+      - addresses
     post:
       consumes:
       - application/json
@@ -175,7 +177,7 @@ paths:
             type: string
       summary: Create a new address
       tags:
-      - address
+      - addresses
   /api/v1/addresses/{id}:
     delete:
       description: DeleteAddress is an example controller that deletes an address
@@ -206,6 +208,8 @@ paths:
           schema:
             type: string
       summary: Delete an address by ID
+      tags:
+      - addresses
     get:
       description: GetAddressByID is an example controller that fetches an address
         by its ID.
@@ -235,6 +239,8 @@ paths:
           schema:
             type: string
       summary: Get an address by ID
+      tags:
+      - addresses
     put:
       consumes:
       - application/json
@@ -272,4 +278,6 @@ paths:
           schema:
             type: string
       summary: Update an address by ID
+      tags:
+      - addresses
 swagger: "2.0"
