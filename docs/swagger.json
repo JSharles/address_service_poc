@@ -1,0 +1,202 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API for address management",
+        "title": "Address Service API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:3001",
+    "basePath": "/api",
+    "paths": {
+        "/api/v1/addresses": {
+            "post": {
+                "description": "CreateAddress is an example controller to create a new address.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "address"
+                ],
+                "summary": "Create a new address",
+                "parameters": [
+                    {
+                        "description": "Address information",
+                        "name": "address",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.AddressRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Address"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Address": {
+            "type": "object",
+            "required": [
+                "latitude",
+                "longitude",
+                "name"
+            ],
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "complementary_informations": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "door_code": {
+                    "type": "string"
+                },
+                "floor": {
+                    "$ref": "#/definitions/models.FloorType"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "latitude": {
+                    "type": "number"
+                },
+                "lift": {
+                    "type": "string"
+                },
+                "loading_dock": {
+                    "type": "boolean"
+                },
+                "location_type": {
+                    "$ref": "#/definitions/models.LocationType"
+                },
+                "longitude": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "side_loading": {
+                    "type": "boolean"
+                },
+                "time_zone": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "yard": {
+                    "$ref": "#/definitions/models.YardType"
+                }
+            }
+        },
+        "models.AddressRequest": {
+            "type": "object",
+            "properties": {
+                "latitude": {
+                    "type": "number"
+                },
+                "longitude": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.FloorType": {
+            "type": "string",
+            "enum": [
+                "basement",
+                "sidewalk",
+                "ground_floor",
+                "first",
+                "second",
+                "third",
+                "fourth",
+                "fifth",
+                "sixth",
+                "seventh"
+            ],
+            "x-enum-varnames": [
+                "Basement",
+                "Sidewalk",
+                "GroundFloor",
+                "First",
+                "Second",
+                "Third",
+                "Fourth",
+                "Fifth",
+                "Sixth",
+                "Seventh"
+            ]
+        },
+        "models.LocationType": {
+            "type": "string",
+            "enum": [
+                "individual",
+                "company",
+                "retail_store",
+                "event",
+                "supermarket",
+                "warehouse",
+                "distribution_platform"
+            ],
+            "x-enum-varnames": [
+                "Individual",
+                "Company",
+                "RetailStore",
+                "Event",
+                "Supermarket",
+                "Warehouse",
+                "DistributionPlatform"
+            ]
+        },
+        "models.YardType": {
+            "type": "string",
+            "enum": [
+                "none",
+                "inf_10m",
+                "between_10_30m",
+                "sup_30m"
+            ],
+            "x-enum-varnames": [
+                "None",
+                "Inf_10m",
+                "Between_10_30m",
+                "Sup_30m"
+            ]
+        }
+    }
+}

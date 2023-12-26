@@ -1,0 +1,146 @@
+basePath: /api
+definitions:
+  models.Address:
+    properties:
+      active:
+        type: boolean
+      complementary_informations:
+        type: string
+      created_at:
+        type: string
+      door_code:
+        type: string
+      floor:
+        $ref: '#/definitions/models.FloorType'
+      id:
+        type: integer
+      latitude:
+        type: number
+      lift:
+        type: string
+      loading_dock:
+        type: boolean
+      location_type:
+        $ref: '#/definitions/models.LocationType'
+      longitude:
+        type: number
+      name:
+        type: string
+      side_loading:
+        type: boolean
+      time_zone:
+        type: string
+      updated_at:
+        type: string
+      yard:
+        $ref: '#/definitions/models.YardType'
+    required:
+    - latitude
+    - longitude
+    - name
+    type: object
+  models.AddressRequest:
+    properties:
+      latitude:
+        type: number
+      longitude:
+        type: number
+      name:
+        type: string
+    type: object
+  models.FloorType:
+    enum:
+    - basement
+    - sidewalk
+    - ground_floor
+    - first
+    - second
+    - third
+    - fourth
+    - fifth
+    - sixth
+    - seventh
+    type: string
+    x-enum-varnames:
+    - Basement
+    - Sidewalk
+    - GroundFloor
+    - First
+    - Second
+    - Third
+    - Fourth
+    - Fifth
+    - Sixth
+    - Seventh
+  models.LocationType:
+    enum:
+    - individual
+    - company
+    - retail_store
+    - event
+    - supermarket
+    - warehouse
+    - distribution_platform
+    type: string
+    x-enum-varnames:
+    - Individual
+    - Company
+    - RetailStore
+    - Event
+    - Supermarket
+    - Warehouse
+    - DistributionPlatform
+  models.YardType:
+    enum:
+    - none
+    - inf_10m
+    - between_10_30m
+    - sup_30m
+    type: string
+    x-enum-varnames:
+    - None
+    - Inf_10m
+    - Between_10_30m
+    - Sup_30m
+host: localhost:3001
+info:
+  contact: {}
+  description: API for address management
+  title: Address Service API
+  version: "1.0"
+paths:
+  /api/v1/addresses:
+    post:
+      consumes:
+      - application/json
+      description: CreateAddress is an example controller to create a new address.
+      parameters:
+      - description: Address information
+        in: body
+        name: address
+        required: true
+        schema:
+          $ref: '#/definitions/models.AddressRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Successfully created
+          schema:
+            $ref: '#/definitions/models.Address'
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Create a new address
+      tags:
+      - address
+swagger: "2.0"

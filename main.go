@@ -1,8 +1,10 @@
 package main
 
 import (
-	"address/routes"
+	c "address/controllers"
 	"address/utils"
+
+	_ "address/docs"
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
@@ -18,9 +20,17 @@ func main() {
 	utils.InitDB()
 
 	r := gin.Default()
-	routes.SetupRoutes(r)
 
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	v1 := r.Group("/api/v1")
+	{
+		// Swagger documentation route for CreateAddress
+		v1.POST("/address", c.CreateAddress)
+
+		// Your other routes go here...
+
+		// Swagger UI route
+		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	}
 
 	r.Run(":3001")
 }

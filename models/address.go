@@ -54,3 +54,9 @@ type Address struct {
 	LoadingDock       bool         `db:"loading_dock" json:"loading_dock"`
 	SideLoading       bool         `db:"side_loading" json:"side_loading"`
 }
+
+type AddressRequest struct {
+	Name      string  `json:"name"`
+	Longitude float64 `json:"longitude"`
+	Latitude  float64 `json:"latitude"`
+}

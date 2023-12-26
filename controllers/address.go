@@ -12,6 +12,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CreateAddress godoc
+// @Summary Create a new address
+// @Description CreateAddress is an example controller to create a new address.
+// @Tags address
+// @Accept json
+// @Produce json
+// @Param address body models.AddressRequest  true "Address information"
+// @Success 201 {object} models.Address "Successfully created"
+// @Failure 400 {object} string "Bad request"
+// @Failure 401 {object} string "Unauthorized"
+// @Failure 500 {object} string "Internal Server Error"
+// @Router /api/v1/addresses [post]
 func CreateAddress(c *gin.Context) {
 
 	var address models.Address
