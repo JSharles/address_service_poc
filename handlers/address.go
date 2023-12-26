@@ -92,6 +92,7 @@ func CreateAddress(c *gin.Context) {
 // GetAddresses godoc
 // @Summary Get all addresses
 // @Description GetAddresses is an example controller that fetches addresses.
+// @Tags address
 // @Produce json
 // @Param active query boolean false "Filter by active status"
 // @Param location_type query string false "Filter by location type"
@@ -166,6 +167,7 @@ func GetAddresses(c *gin.Context) {
 // GetAddressByID godoc
 // @Summary Get an address by ID
 // @Description GetAddressByID is an example controller that fetches an address by its ID.
+// @Tags address
 // @Produce json
 // @Param id path int true "Address ID"
 // @Success 200 {object} models.Address "Successfully retrieved"
@@ -221,11 +223,12 @@ func GetAddressByID(c *gin.Context) {
 // UpdateAddress godoc
 // @Summary Update an address by ID
 // @Description UpdateAddress is an example controller that updates an address by its ID.
+// @Tags address
 // @Accept json
 // @Produce json
 // @Param id path int true "Address ID"
 // @Param address body models.Address true "Updated address information"
-// @Success 200 {object} gin.H "Address updated successfully"
+// @Success 200 {object} string "Address updated successfully"
 // @Failure 400 {object} string "Bad request"
 // @Failure 404 {object} string "Address not found"
 // @Failure 500 {object} string "Internal Server Error"
@@ -367,9 +370,10 @@ func UpdateAddress(c *gin.Context) {
 // DeleteAddress godoc
 // @Summary Delete an address by ID
 // @Description DeleteAddress is an example controller that deletes an address by its ID.
+// @Tags address
 // @Produce json
 // @Param id path int true "Address ID"
-// @Success 200 {object} gin.H "Address deleted successfully"
+// @Success 200 {object} string "Address deleted successfully"
 // @Failure 400 {object} string "Bad request"
 // @Failure 404 {object} string "Address not found"
 // @Failure 500 {object} string "Internal Server Error"

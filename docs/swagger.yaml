@@ -110,6 +110,39 @@ info:
   version: "1.0"
 paths:
   /api/v1/addresses:
+    get:
+      description: GetAddresses is an example controller that fetches addresses.
+      parameters:
+      - description: Filter by active status
+        in: query
+        name: active
+        type: boolean
+      - description: Filter by location type
+        in: query
+        name: location_type
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully retrieved
+          schema:
+            items:
+              $ref: '#/definitions/models.Address'
+            type: array
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get all addresses
     post:
       consumes:
       - application/json
@@ -143,4 +176,100 @@ paths:
       summary: Create a new address
       tags:
       - address
+  /api/v1/addresses/{id}:
+    delete:
+      description: DeleteAddress is an example controller that deletes an address
+        by its ID.
+      parameters:
+      - description: Address ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Address deleted successfully
+          schema:
+            type: string
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "404":
+          description: Address not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Delete an address by ID
+    get:
+      description: GetAddressByID is an example controller that fetches an address
+        by its ID.
+      parameters:
+      - description: Address ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully retrieved
+          schema:
+            $ref: '#/definitions/models.Address'
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "404":
+          description: Address not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get an address by ID
+    put:
+      consumes:
+      - application/json
+      description: UpdateAddress is an example controller that updates an address
+        by its ID.
+      parameters:
+      - description: Address ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated address information
+        in: body
+        name: address
+        required: true
+        schema:
+          $ref: '#/definitions/models.Address'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Address updated successfully
+          schema:
+            type: string
+        "400":
+          description: Bad request
+          schema:
+            type: string
+        "404":
+          description: Address not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Update an address by ID
 swagger: "2.0"
