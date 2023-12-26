@@ -25,8 +25,8 @@ Before you start, ensure that you have [Golang](https://golang.org/dl/) installe
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/your-microservice.git
-   cd your-microservice
+   git clone https://github.com/JSharles/address_service_poc.git
+   cd address_service_poc
    ```
 
 2. Install dependencies:
