@@ -2,6 +2,7 @@ package main
 
 import (
 	c "address/controllers"
+	"address/routes"
 	"address/utils"
 
 	_ "address/docs"
@@ -20,15 +21,11 @@ func main() {
 	utils.InitDB()
 
 	r := gin.Default()
+	routes.SetupRoutes(r)
 
 	v1 := r.Group("/api/v1")
 	{
-		// Swagger documentation route for CreateAddress
 		v1.POST("/address", c.CreateAddress)
-
-		// Your other routes go here...
-
-		// Swagger UI route
 		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
 
