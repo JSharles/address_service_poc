@@ -58,6 +58,12 @@ AND
 ./the-name-you-picked
 ```
 
+6.Run tests:
+
+```bash
+make test
+```
+
 ## Swagger Documentation
 
 After starting the microservice locally, you can access the Swagger documentation at:
